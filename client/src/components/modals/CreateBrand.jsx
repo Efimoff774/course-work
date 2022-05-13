@@ -8,10 +8,16 @@ const CreateBrand = ({ show, onHide }) => {
     const [value, setValue] = useState('')
 
     const addBrand = () => {
-        createBrand({ name: value }).then(data => {
-            setValue('')
-            onHide()
-        })
+        try {
+            createBrand({ name: value }).then(data => {
+                setValue('')
+                onHide()
+            })
+        }
+
+        catch (e) {
+            alert(e.response.data.message)
+        }
     }
 
     return (
@@ -31,7 +37,7 @@ const CreateBrand = ({ show, onHide }) => {
                     <Form.Control
                         value={value}
                         onChange={e => setValue(e.target.value)}
-                        placeholder={'Введите название типа'}
+                        placeholder={'Введите название бренда'}
                     />
                 </Form>
             </Modal.Body>
